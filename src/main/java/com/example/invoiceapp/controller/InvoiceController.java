@@ -29,30 +29,22 @@ public class InvoiceController {
         return invoiceService.getAllInvoices();
     }
 
-    // Get all items from a specific invoice
-    @GetMapping("/{id}")
-    public ResponseEntity<Invoice> getInvoiceById(@PathVariable("id") long invoiceId) {
-//        itemService.getAllItems();
-        return new ResponseEntity<Invoice>(invoiceService.getInvoiceById(invoiceId),HttpStatus.OK);
-    }
-
-    // Get all items from a specific invoice
-    @GetMapping("/{id}/items")
-    public ResponseEntity<List<Item>> getAllInvoiceItems(@PathVariable("id") long invoiceId) {
-//        itemService.getAllItems();
-        return new ResponseEntity<List<Item>>(itemService.getAllItems(invoiceId),HttpStatus.OK);
-    }
-
-    // Save a new item
-    @PostMapping("/items")
-    public ResponseEntity<Item> saveItem(@RequestBody Item item, Invoice invoice) {
-        return new ResponseEntity<Item>(itemService.saveItem(item), HttpStatus.CREATED);
-    }
-
     // Save a new invoice
     @PostMapping
     public ResponseEntity<Invoice> saveInvoice(@RequestBody Invoice invoice) {
         System.out.println(invoice);
         return new ResponseEntity<Invoice>(invoiceService.saveInvoice(invoice), HttpStatus.CREATED);
+    }
+
+    // Get all invoices
+    @GetMapping("{id}")
+    public Invoice getInvoiceById(@PathVariable("id") long id) {
+        return invoiceService.getInvoiceById(id);
+    }
+
+    // Update invoice
+    @PutMapping("{id}")
+    public ResponseEntity<Invoice> updateEmployee(@PathVariable("id") long id, @RequestBody Invoice invoice){
+        return new ResponseEntity<Invoice>(invoiceService.updateInvoice(invoice, id), HttpStatus.OK);
     }
 }

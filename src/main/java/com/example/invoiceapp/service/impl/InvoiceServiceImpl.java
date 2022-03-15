@@ -37,7 +37,22 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice updateInvoice(Invoice invoice, long id) {
-        return null;
+        Invoice existingInvoice = invoiceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Invoice", "Id", id));
+
+        existingInvoice.setPaymentDue(invoice.getPaymentDue());
+        existingInvoice.setDescription(invoice.getDescription());
+        existingInvoice.setPaymentTerms(invoice.getPaymentTerms());
+        existingInvoice.setClientName(invoice.getClientName());
+        existingInvoice.setClientEmail(invoice.getClientEmail());
+        existingInvoice.setStatus(invoice.getStatus());
+        existingInvoice.setSenderAddress(invoice.getSenderAddress());
+        existingInvoice.setClientAddress(invoice.getClientAddress());
+        existingInvoice.setTotal(invoice.getTotal());
+        existingInvoice.setItems(invoice.getItems());
+
+        // Save existing invoice to DB
+        invoiceRepository.save(existingInvoice);
+        return existingInvoice;
     }
 
     @Override
