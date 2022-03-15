@@ -47,4 +47,15 @@ public class InvoiceController {
     public ResponseEntity<Invoice> updateEmployee(@PathVariable("id") long id, @RequestBody Invoice invoice){
         return new ResponseEntity<Invoice>(invoiceService.updateInvoice(invoice, id), HttpStatus.OK);
     }
+
+    // Delete invoice
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") long id){
+
+        // delete invoice from DB
+        invoiceService.deleteInvoice(id);
+
+        return new ResponseEntity<String>("Invoice deleted successfully!.", HttpStatus.OK);
+    }
+
 }
