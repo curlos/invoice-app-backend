@@ -1,5 +1,6 @@
 package com.example.invoiceapp.service.impl;
 
+import com.example.invoiceapp.exception.ResourceNotFoundException;
 import com.example.invoiceapp.model.Invoice;
 import com.example.invoiceapp.repository.InvoiceRepository;
 import com.example.invoiceapp.service.InvoiceService;
@@ -19,6 +20,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<Invoice> getAllInvoices() {
+
         return invoiceRepository.findAll();
     }
 
@@ -30,7 +32,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice getInvoiceById(long id) {
-        return null;
+        return invoiceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Invoice", "Id", id));
     }
 
     @Override
