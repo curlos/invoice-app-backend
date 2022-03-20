@@ -23,7 +23,7 @@ public class InvoiceController {
     }
 
     // Get all invoices
-    @CrossOrigin(origins = {"http://localhost:4200", "https://invoice-app-springboot.herokuapp.com"})
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping
     public List<Invoice> getAllInvoices() {
         return invoiceService.getAllInvoices();
@@ -37,15 +37,15 @@ public class InvoiceController {
         return new ResponseEntity<Invoice>(invoiceService.saveInvoice(invoice), HttpStatus.CREATED);
     }
 
-    // Get all invoices
-    @CrossOrigin(origins = {"http://localhost:4200", "https://invoice-app-springboot.herokuapp.com"})
+    // Get invoice by id
+    @CrossOrigin(origins = "http://localhost:4200/")
     @GetMapping("{id}")
     public Invoice getInvoiceById(@PathVariable("id") long id) {
         return invoiceService.getInvoiceById(id);
     }
 
     // Update invoice
-    @CrossOrigin(origins = {"http://localhost:4200", "https://invoice-app-springboot.herokuapp.com"})
+    @CrossOrigin(origins = "http://localhost:4200/")
     @PutMapping("{id}")
     public ResponseEntity<Invoice> updateEmployee(@PathVariable("id") long id, @RequestBody Invoice invoice){
         return new ResponseEntity<Invoice>(invoiceService.updateInvoice(invoice, id), HttpStatus.OK);
