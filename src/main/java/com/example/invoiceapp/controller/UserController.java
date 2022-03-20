@@ -18,7 +18,7 @@ public class UserController {
     }
 
     // Register a new user
-    @CrossOrigin(origins = "http://localhost:4200/")
+    @CrossOrigin(origins = {"http://localhost:4200", "https://invoice-app-springboot.herokuapp.com"})
     @PostMapping("/register")
     public ResponseEntity<User> saveInvoice(@RequestBody User user) {
         System.out.println(user);
