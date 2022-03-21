@@ -17,7 +17,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID itemId;
+    private long itemId;
 
     @Column(name = "name")
     private String name;
