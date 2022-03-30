@@ -3,11 +3,16 @@ package com.example.invoiceapp.model;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
+import org.hibernate.annotations.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Getter
@@ -57,6 +62,16 @@ public class Invoice {
     @JoinColumn(name = "invoice_id", referencedColumnName = "id")
     private List<Item> items;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
     @Override
     public String toString() {
         return "Invoice{" +
@@ -71,6 +86,8 @@ public class Invoice {
                 ", clientAddress=" + clientAddress +
                 ", total='" + total + '\'' +
                 ", items=" + items +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 
