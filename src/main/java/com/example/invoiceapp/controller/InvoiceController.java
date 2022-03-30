@@ -59,7 +59,7 @@ public class InvoiceController {
         // delete invoice from DB
         invoiceService.deleteInvoice(id);
 
-        return new ResponseEntity<String>("Invoice deleted successfully!.", HttpStatus.OK);
+        return new ResponseEntity<>("\" Invoice deleted successfully. \"", HttpStatus.OK);
     }
 
 }
